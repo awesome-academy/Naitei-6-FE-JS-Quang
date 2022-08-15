@@ -1,0 +1,10 @@
+root = true
+
+[*]
+# Các thuộc tính cho mọi file
+indent_size = 4
+
+[*.{js,ts}]
+# Các thuộc tính cho file .js và .ts
+indent_size = 2
+tab_width = 2
