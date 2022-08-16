@@ -2,6 +2,7 @@ import { renderTemplate, request } from './helpers.js';
 
 function detailProduct(product) {
   let imgs = '';
+  console.log(product.imgs);
   for (let img of product.imgs) {
     imgs += `<div class="detail-slide-img"><img class="img-fluid" src="${img}" alt=""></div>`;
   }

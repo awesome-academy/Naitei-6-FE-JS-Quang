@@ -19,6 +19,9 @@
       border: 2px solid var(--color-gray);
     }
   }
+  &-hide {
+    display: none;
+  }
   tr {
     text-align: center;
     font-size: 16px;
@@ -48,6 +51,18 @@
     margin-top: 20px !important;
     button {
       padding: 8px 16px !important;
+    }
+  }
+
+  &-footer {
+    margin: 10px 0;
+    font-size: 20px;
+    text-align: right;
+    & > span {
+      padding: 0px 10px;
+    }
+    & > span:nth-child(2) {
+      font-weight: bold;
     }
   }
 }

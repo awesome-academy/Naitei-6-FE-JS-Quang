@@ -16,17 +16,16 @@ mixin field(obj)
             
 
 mixin formEdit(obj)
-    form
-        if obj.isAdd
-            h3.form-title.my-3.form-title--active=obj.title
-        else 
-            h3.form-title.my-3=obj.title
-        each item in obj.fields 
-            +field({...item,disable:obj.disable})
-        if !obj.disable
-            +field(obj.radioBtn)
-        if block
-            .row.gx-0
-                .col-lg-2.gx-0 
-                .col-lg-10.gx-0 
-                    block 
+    if obj.isAdd
+        h3.form-title.my-3.form-title--active=obj.title
+    else 
+        h3.form-title.my-3=obj.title
+    each item in obj.fields 
+        +field({...item,disable:obj.disable})
+    if !obj.disable
+        +field(obj.radioBtn)
+    if block
+        .row.gx-0
+            .col-lg-2.gx-0 
+            .col-lg-10.gx-0 
+                block 

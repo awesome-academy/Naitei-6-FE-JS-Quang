@@ -13,7 +13,7 @@ mixin topbar(currentPage)
                 i.bi.bi-search
 
 mixin navigation(currentPage)
-    -var navItems = [{name:"Trang chủ",href:"#"},{name:"Rượu vang đỏ",href:"#"},{name:"Rượu trắng",href:"#"},{name:"Champange",href:"#"},{name:"Thông tin",href:"#"},{name:"Blog",href:"#"},{name:"Liên hệ",href:"#"},{name:"Giỏ hàng",href:"cart/cart.html"}];
+    -var navItems = [{name:"Trang chủ",href:"#"},{name:"Rượu vang đỏ",href:"#"},{name:"Rượu trắng",href:"#"},{name:"Champange",href:"#"},{name:"Thông tin",href:"#"},{name:"Blog",href:"#"},{name:"Liên hệ",href:"#"},{name:"Giỏ hàng",href:"http://localhost:3000/pages/cart/cart.html"}];
     - var itemCol1 = {title:'Rượu ngoại',list:[{text:'Rượu chivas',href:'../pages/detail/detail.html'},{text:'Rượu Walker',href:'!#'},{text:'Rượu Quế',href:'!#'},{text:'Rượu Tequilla',href:'!#'},{text:'Rượu Treva',href:'!#'}]};
     input#menuToggle.nav-toggle(type='checkbox')
     label.nav-icon(for='menuToggle')
@@ -49,14 +49,11 @@ mixin navCol(obj)
 
 mixin button(obj)
     if obj.text
-        button.btn(class= obj.class)= obj.text
+        button.btn(class= obj.class,data-value=obj.value)= obj.text
     else 
-        button.btn(class= obj.class)
+        button.btn(class= obj.class,data-value=obj.value)
             block
 
-        each item in navItems 
-            li.nav-menu-item 
-                a(href= item.href)= item.name
 
 mixin specialProduct(obj) 
     .special-time 

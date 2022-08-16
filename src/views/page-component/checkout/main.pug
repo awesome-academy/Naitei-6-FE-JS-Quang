@@ -1,0 +1,34 @@
+include ../../abstract/form
+include ../cart/main
+
+- var fields = [{id:'name',label:'Tên',type:'text',value:'Quân'},{id:'sc-name',label:'Họ&Tên đệm',type:'text',value:'Nguyễn Minh'},{id:'ct',label:'Công ty',type:'text',value:'abcxyz'},{id:'dc',label:'Địa chỉ',type:'text',value:'123 abc Str'},{id:'tp',label:'Thành phố',type:'text',value:'Florida'}];
+- var checkfields=  [{id:'name',label:'Tên',type:'text'},{id:'sc-name',label:'Họ&Tên đệm',type:'text'},{id:'ct',label:'Công ty',type:'text'},{id:'dc',label:'Địa chỉ',type:'text'},{id:'tp',label:'Thành phố',type:'text'}];
+- var thead = ['Ảnh','Tên sản phẩm','Giá','Số lượng','Tổng số']
+- var progress = [{text:'Check đơn hàng',active:true,value:1},{text:'Thông tin thanh toán',active:false,value:2},{text:'Xác nhận thanh toán',active:false,value:3}]
+
+
+form.container-fluid
+    ul.form-progress.container.my-4
+        each item in progress
+            if item.active 
+                li.form-progress-active(data-value=item.value)= item.text
+            else
+                li(data-value=item.value)= item.text
+    fieldset.container.my-4.py-3(data-value='1')
+        +cart({checkout:true})
+            +button({text:'NEXT',class:'form-btn-next js-form-btn-next',value:'1'})
+    fieldset.checkout.container.my-4.py-3(data-value='2')
+        .row 
+            .col-lg-12
+                +formEdit({fields,title:'Thông tin thanh toán'})
+                    .form-btn-group.form-btn-group--left
+                        +button({text:'PREV',class:'form-btn-prev js-form-btn-prev',value:'2'})
+                        +button({text:'NEXT',class:'form-btn-next js-form-btn-next',value:'2'})
+    fieldset.confirm.container.my-4.py-3(data-value='3')
+        .row 
+            .col-lg-12
+                +cart({checkout:true})
+                +formEdit({fields:checkfields,title:'Thông tin thanh toán',disable:true})
+                    .form-btn-group.form-btn-group--left
+                        +button({text:'PREV',class:'form-btn-prev js-form-btn-prev',value:'3'})
+                        +button({text:'Thanh toán',class:'form-btn-checkout js-form-btn-checkout'})
