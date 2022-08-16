@@ -26,7 +26,7 @@
     font-size: 14px;
     line-height: 21px;
     margin: 5px 0;
-
+    cursor: pointer;
     &:hover {
       a {
         color: var(--color-primary);
@@ -35,6 +35,10 @@
 
     a {
       color: var(--color-footer-link);
+    }
+
+    &--active > a {
+      color: var(--color-primary);
     }
 
     span {
