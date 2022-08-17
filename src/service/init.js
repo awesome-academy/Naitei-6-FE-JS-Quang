@@ -30,11 +30,14 @@ const generateData = () => {
     }
     const newProduct = {
       id: numberProducts,
-      name: faker.commerce.productName(),
-      price: faker.commerce.price(),
-      type: category[0][Math.floor(Math.random() * category.length)],
+      name: `Product ${numberProducts}`,
+      price: Math.floor(Math.random() * 500),
+      type: category[0]['list'][
+        Math.floor(Math.random() * category[0]['list'].length)
+      ],
       tag: tags[Math.floor(Math.random() * tags.length)],
-      thumbnail: faker.image.food(300, 400),
+      thumbnail:
+        'https://smd.com.vn/wp-content/uploads/2020/04/The-235-Italian-1.png',
       imgs: imgs,
       description: faker.commerce.productDescription(),
       star: Math.floor(Math.random() * 5),

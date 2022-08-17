@@ -1,5 +1,5 @@
 const { src, dest, parallel, watch, series } = require('gulp');
-const concat = require('gulp-concat');
+// const concat = require('gulp-concat');
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const pug = require('gulp-pug');
@@ -8,7 +8,7 @@ const FilesPath = {
   sassFiles: './src/sass/**/*.scss',
   htmlFiles: './src/views/**/*.pug',
   jsFiles: './src/script/*.js',
-  assetsFiles: './src/assets/*',
+  assetsFiles: './src/assets/*'
 };
 
 function sassTask() {
@@ -27,9 +27,7 @@ function htmlTask() {
     .pipe(browserSync.stream());
 }
 function jsTask() {
-  return src(FilesPath.jsFiles)
-    .pipe(concat('all.js'))
-    .pipe(dest('./public/js'));
+  return src(FilesPath.jsFiles).pipe(dest('./public/js'));
 }
 function assetsTask() {
   return src(FilesPath.assetsFiles).pipe(dest('./public/assets'));
