@@ -13,7 +13,7 @@ mixin topbar(currentPage)
                 i.bi.bi-search
 
 mixin navigation(currentPage)
-    -var navItems = [{name:"Trang chủ",href:"#"},{name:"Rượu vang đỏ",href:"#"},{name:"Rượu trắng",href:"#"},{name:"Champange",href:"#"},{name:"Thông tin",href:"#"},{name:"Blog",href:"#"},{name:"Liên hệ",href:"#"},{name:"Giỏ hàng",href:"#"}];
+    -var navItems = [{name:"Trang chủ",href:"#"},{name:"Rượu vang đỏ",href:"#"},{name:"Rượu trắng",href:"#"},{name:"Champange",href:"#"},{name:"Thông tin",href:"#"},{name:"Blog",href:"#"},{name:"Liên hệ",href:"#"},{name:"Giỏ hàng",href:"cart/cart.html"}];
     - var itemCol1 = {title:'Rượu ngoại',list:[{text:'Rượu chivas',href:'../pages/detail/detail.html'},{text:'Rượu Walker',href:'!#'},{text:'Rượu Quế',href:'!#'},{text:'Rượu Tequilla',href:'!#'},{text:'Rượu Treva',href:'!#'}]};
     input#menuToggle.nav-toggle(type='checkbox')
     label.nav-icon(for='menuToggle')
@@ -91,7 +91,7 @@ mixin productCard(obj)
                 span.product-price-main= obj.price
                 if obj.discount
                     span.product-price-discount= obj.discount
-            button.btn.product-btn ADD TO CART            
+            button.btn.product-btn.js-product-btn ADD TO CART            
 
 mixin productDisplay(obj)
     section.container-fluid(class=obj.class)

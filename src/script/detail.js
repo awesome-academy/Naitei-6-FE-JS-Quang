@@ -65,6 +65,5 @@ function detailProduct(product) {
 }
 
 request(`products/${window.location.hash.slice(1)}`).then((res) => {
-  console.log(res);
   detailProduct(res);
 });

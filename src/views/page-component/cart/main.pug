@@ -15,17 +15,17 @@ include ../../abstract/mixins
                             each item in thead 
                                 th= item 
                     tbody.cart-body 
-                        each item in items
-                            tr 
-                                td
-                                    img(src=item.img,'alt').img-fluid.cart-img
-                                td= item.name
-                                td.cart-bold= item.price 
-                                td= item.num
-                                td.cart-bold= item.price 
-                                td.cart-btn
-                                    span.bi.bi-trash
+                        //- each item in items
+                        //-     tr 
+                        //-         td
+                        //-             img(src=item.img,'alt').img-fluid.cart-img
+                        //-         td= item.name
+                        //-         td.cart-bold= item.price 
+                        //-         td= item.num
+                        //-         td.cart-bold= item.price 
+                        //-         td.cart-btn
+                        //-             span.bi.bi-trash
             .col-lg-12.cart-group-btn
-                +button({text:'Tiếp tục mua hàng'})
-                +button({text:'Xoá'})
-                +button({text:'Cập nhật'})
+                +button({text:'Thanh toán',class:'cart-btn-checkout js-cart-btn-checkout'})
+                +button({text:'Xoá tất cả',class:'cart-btn-del js-cart-btn-del'})
+

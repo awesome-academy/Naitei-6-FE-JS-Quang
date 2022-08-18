@@ -1,4 +1,5 @@
-import { renderTemplate, request } from './helpers.js';
+import { renderTemplate, request, cart } from './helpers.js';
+import { PREFIX } from './constant.js';
 
 const NUM_PER_PAGE = 10;
 let activePagination = 1;
@@ -17,7 +18,7 @@ function setPagination(num, active) {
     .map((_, index) => {
       const pageNum = index + 1;
       const isActive = pageNum === active;
-      return `<li data-page="${pageNum}" class="pagination-list-item ${
+      return `<li data-page="${pageNum}" class="${PREFIX}pagination-list-item pagination-list-item ${
         isActive ? 'pagination-list-item--active' : ''
       }">${pageNum}</li>`;
     })
@@ -34,7 +35,7 @@ function categoryFilter(listCategory) {
     title = `<h3 class="product-sidebar-title">${category.title || ''}</h3>`;
     let list = '';
     for (let item of category.list) {
-      list += `<li class="product-sidebar-item" data-value="${item}"><a href="#${item}">${item}</a></li>`;
+      list += `<li class="product-sidebar-item ${PREFIX}product-sidebar-item" data-value="${item}"><a href="#${item}">${item}</a></li>`;
     }
     finalList = `<ul class="product-sidebar-list">${list}</ul>`;
     const template = `${title}${finalList}`;
@@ -47,7 +48,7 @@ function tagFilter(tags, tagActive) {
   let tagItem = '';
   let template = '';
   for (let tag of tags) {
-    tagItem += `<li data-value="${tag}" class="tag-item ${
+    tagItem += `<li data-value="${tag}" class="tag-item ${PREFIX}tag-item ${
       tagActive == tag ? 'tag-item--active' : ''
     }">${tag}</li>`;
   }
@@ -72,8 +73,9 @@ function filterAction(products, attr, className, activeClassName) {
 }
 
 function productItem(product) {
-  let template = `<div class="product-card" id="${product.id}">
-      <div class="product-img">
+  let template = `<div class="product-card" >
+    <div class="product-content" id="${product.id}">
+      <div class="product-img" >
         <img src="${product.thumbnail}" alt="" />
       </div>
       <div class="product-quick">
@@ -89,8 +91,9 @@ function productItem(product) {
 				<div class="product-price">
 					<span class="product-price-main">${product.price}</span>
 				</div>
-				<button class="btn product-btn">ADD TO CART</button>
 			</div>
+      </div>
+      <button class="btn product-btn ${PREFIX}product-btn">ADD TO CART</button>
     </div>`;
   if (!gridType) {
     template = `<div class="product-list-card" id="${product.id}">
@@ -121,7 +124,7 @@ function productItem(product) {
 }
 
 function paginationAction(products) {
-  document.querySelectorAll('.pagination-list-item').forEach((pageItem) => {
+  document.querySelectorAll('.js-pagination-list-item').forEach((pageItem) => {
     pageItem.addEventListener('click', (e) => {
       e.preventDefault();
       let currentPage = pageItem.dataset.page;
@@ -150,6 +153,22 @@ function productsRender(products) {
   return;
 }
 
+function addToCart() {
+  document.querySelectorAll('.js-product-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const parentEl = btn.parentElement;
+      const objectProduct = {
+        id: parentEl.querySelector('.product-content').id,
+        name: parentEl.querySelector('.product-name').textContent,
+        price: parentEl.querySelector('.product-price').textContent,
+        img: parentEl.querySelector('.product-img img').getAttribute('src')
+      };
+      cart.push(objectProduct);
+    });
+  });
+}
+
 request('tags')
   .then((res) => {
     tagFilter(res, 'Cao cấp');
@@ -166,10 +185,10 @@ request('products')
     filterAction(
       res,
       'type',
-      'product-sidebar-item',
+      'js-product-sidebar-item',
       'product-sidebar-item--active'
     );
-    filterAction(res, 'tag', 'tag-item', 'tag-item--active');
+    filterAction(res, 'tag', 'js-tag-item', 'tag-item--active');
 
     setPagination(
       Math.floor(res.length / NUM_PER_PAGE),
@@ -186,5 +205,6 @@ request('products')
         window.location.pathname = `/pages/detail/detail.html`;
       });
     });
+    addToCart();
   })
   .catch((err) => console.log(err));

@@ -5,7 +5,7 @@ mixin listProduct(obj)
     h3.product-sidebar-title= obj.title
     ul.product-sidebar-list 
         each item in obj.list
-            li.product-sidebar-item
+            li.product-sidebar-item.js-product-sidebar-item
                 a(href=item.href)= item.text 
                     span= `(${item.num})`
 
@@ -23,9 +23,9 @@ mixin listTag(obj)
     ul.tag-list
         each item in obj.list
             if item.isActive 
-                li.tag-item.tag-item--active= item.text
+                li.js-tag-item.tag-item.tag-item--active= item.text
             else 
-                li.tag-item= item.text
+                li.js-tag-item.tag-item= item.text
 
 mixin pagination(obj)
     ul.pagination-list
@@ -33,9 +33,9 @@ mixin pagination(obj)
         each item,i in Array(obj.num)
             -var check = i == obj.currentPage
             if check 
-                li.pagination-list-item.pagination-list-item--active= i+1
+                li.js-pagination-list-item.pagination-list-item.pagination-list-item--active= i+1
             else 
-                li.pagination-list-item= i+1
+                li.js-pagination-list-item.pagination-list-item= i+1
         i.bi.bi-chevron-right
 
 
@@ -51,5 +51,5 @@ mixin productListCard(obj)
                 .product-list-price= obj.price
                 .product-list-desc= obj.desc
                 .product-list-group 
-                    +button({text:'Add to cart',class:'product-list-btn'})
+                    +button({text:'Add to cart',class:'product-btn'})
                     +btnIcon({icons})

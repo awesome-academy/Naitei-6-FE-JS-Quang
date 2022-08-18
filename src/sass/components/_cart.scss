@@ -3,6 +3,12 @@
     max-height: 145px;
     margin: 10px 0;
   }
+
+  &-notify {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
   &-table {
     margin-top: 30px !important;
     overflow-x: auto;
