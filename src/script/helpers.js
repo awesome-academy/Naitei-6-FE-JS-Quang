@@ -1,7 +1,12 @@
+/* eslint-disable no-undef */
 import { baseURL, cartKey } from './constant.js';
 
 export const getLocalStorageByKey = (key, defaultValue = []) => {
   return JSON.parse(localStorage.getItem(key)) || defaultValue;
+};
+
+export const setLocalStorageByKey = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
 };
 
 export function renderTemplate(container, template, position) {
@@ -20,6 +25,9 @@ export function request(path, type, data) {
   }).then((res) => res.json());
 }
 export const cart = {
+  set: function (products) {
+    localStorage.setItem(cartKey, JSON.stringify(products));
+  },
   get: function () {
     return getLocalStorageByKey(cartKey);
   },
@@ -43,3 +51,18 @@ export const cart = {
     localStorage.setItem(cartKey, JSON.stringify([]));
   }
 };
+export function toast(color, message) {
+  setTimeout(() => {
+    Toastify({
+      text: message,
+      duration: 3000,
+      close: true,
+      gravity: 'bottom',
+      position: 'right',
+      stopOnFocus: true,
+      style: {
+        background: color
+      }
+    }).showToast();
+  }, 1000);
+}
